@@ -1,0 +1,7 @@
+title: "GLMR AI Midterm Journal"
+description: "A GitHub Pages publication curating the Introduction to AI midterm presentations and reports."
+theme: minima
+# Enable relative links for assets outside docs/
+relative_links:
+  enabled: true
+  collections: true

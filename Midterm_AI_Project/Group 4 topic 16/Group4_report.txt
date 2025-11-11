@@ -1,0 +1,666 @@
+Optimizing Multi-Agent Path Finding in Warehouse:
+A Comparative Analysis of Search Algorithms
+Applied to the Two-Robot Routing
+Dao Ngoc Hien, Nguyen Thi Nhien, Le Ngoc Anh Thu, Tran Khai Van
+National Economics University, Vietnam
+Abstract.Coordinating multiple autonomous agents in shared environ-
+ments poses complex routing challenges. This study models the Two Robots
+Routing problem as a constrained pathfinding task, where two robots must
+reach their respective goals without collisions and with minimal total
+movement cost. We compare three classical search algorithms: Breadth-
+First Search (BFS), A* Search, and Joint A* with combined distance and
+conflict-avoidance heuristics. Our experimental evaluation highlights key
+differences in performance regarding explored states, solution optimal-
+ity, and computational efficiency. Results indicate that A* consistently
+yields optimal coordinated paths with the fewest conflicts, while BFS en-
+sures completeness at the expense of high time and memory usage. GBFS
+achieves faster runtime but may produce suboptimal or deadlocked paths.
+These findings offer practical insights into designing efficient multi-agent
+routing strategies applicable to warehouse automation, robotics coordina-
+tion, and intelligent transportation systems.
+Keywords.Search Algorithm ·Multi-Agent Path Finding ·Two-robot
+routing ·Warehouse Robotics ·Makespan ·Joint A* ·Breadth-First Search
+·Heuristic search·Artificial intelligence
+1 Introduction
+In automated warehouse systems, robotic coordination plays a crucial role in ensuring efficient item
+retrieval, delivery, and overall workflow optimization. Poor coordination or routing conflicts between
+robots can lead to collisions, deadlocks, or delays, ultimately reducing system efficiency and reliability.
+We can model this coordination challenge as a Multi-Agent Path Finding (MAPF) problem, where each
+robot represents an agent that must move from a start position to a target position without colliding with
+other agents or obstacles in the environment. [8]
+The MAPF problem involves finding collision-free paths for multiple robots operating on a shared
+grid or graph. Each robot moves step-by-step between adjacent nodes, and the objective is to minimize
+the total cost—often expressed as the sum of all path lengths or the makespan (time until all robots reach
+their goals). In our study, we focus on the Two Robots Routing case, a simplified yet insightful version
+of the MAPF problem, where only two agents are involved. This simplification allows us to analyze
+coordination dynamics and algorithmic performance in a controlled setting.
+The significance of solving the MAPF problem extends beyond theoretical interest. Efficient multi-
+robot routing algorithms are vital for real-world applications such as warehouse automation [ 10,8],
+1
+autonomous delivery systems, airport logistics, and even space exploration missions. Understanding the
+computational trade-offs of various search strategies provides essential insights for developing scalable
+and robust multi-agent coordination systems.
+In this study, we implement and compare three classical search algorithms: Breadth-First Search
+(BFS), Greedy Best-First Search (GBFS) using heuristic distance, and A* Search with a combined
+heuristic for path optimization. We evaluate their performance in terms of solution optimality, number
+of expanded nodes, and computational time, thereby assessing the effectiveness of classical AI search
+techniques for two-robot coordination in shared environments. [1, 4]
+2 Problem Formulation
+2.1 State Space Representation
+The Two-Robot Routing Problem can be formulated as a search problem with the following components:
+State Space (S): Each state represents a configuration of the 10×10 grid that specifies the current
+positions of both robots. Formally, a state can be defined as:
+s= ((x A, yA),(xB, yB))
+where(x A, yA)and(x B, yB)denote the coordinates of Robot A and Robot B, respectively.
+Each grid cell may be either free (traversable) or an obstacle (blocked). The environment is therefore
+represented as a 10×10 matrix G[i][j] , where G[i][j] = 0 indicates a free cell and G[i][j] = 1 represents
+an obstacle.
+Initial State ( s0):The configuration in which both robots start at their predefined positions before
+navigation begins
+Goal State (s g):The target configuration where each robot reaches its assigned destination cell:
+sg= ((x A,g, yA,g),(x B,g, yB,g))
+Actions ( a):At every discrete time step, each robot may perform one of the following five primitive
+actions:
+ai={Up, Down, Left, Right, Wait}
+To maintain safety and coordination, the following collision constraints must be satisfied for every
+transition:
+1. Robots cannot occupy the same grid cell:(x′
+A, y′
+A)̸= (x′
+B, y′
+B)
+2. Robots cannot swap positions in the same time step (edge conflict)
+Transition Model:Given a current state sand a joint action a= (a A, aB), the new state s′is
+generated by applying the respective movements of both robots on the 10×10 grid, ensuring all constraints
+above are respected. If an action would move a robot into an obstacle or cause a collision, that transition
+is considered invalid and excluded from the state space.
+Path Cost:Each synchronized time step has a uniform cost of 1. The total cost of a plan can be
+evaluated under the objective of Makespan, the total time required until both robots finish their routes [ 8]
+2.2 Heuristic Functions
+To efficiently guide the search process in the two-robot routing problem, we employ heuristic functions
+that estimate the remaining cost from a given state to the goal state. Since both robots move in a shared
+10×10 grid, heuristics must account for their independent distances to their respective goals while main-
+taining collision avoidance.
+2
+Manhattan Distance Heuristic (h 1):
+This heuristic computes the sum of the Manhattan distances for both robots from their current positions
+to their individual goal cells:
+h1(s) =|x A−xA,g|+|y A−yA,g|+|x B−xB,g|+|y B−yB,g|
+It assumes that each robot moves independently in an obstacle-free environment.
+Although it ignores potential conflicts between robots, it provides a fast and admissible estimate for the
+minimum number of moves required for both robots to reach their goals.
+Maximum Distance Heuristic (h 2):
+When optimizing for makespan, the heuristic should consider the slower (i.e., farthest) robot as the
+dominant factor:
+h2(s) =max(d A, dB)
+where dA=|x A−xA,g|+|y A−yA,g|anddB=|x B−xB,g|+|y B−yB,g|. This heuristic directly
+aligns with the makespan objective by estimating the minimum number of time steps required until both
+robots have reached their destinations.
+Both heuristics described above are admissible, meaning they never overestimate the true minimal
+cost, and consistent, ensuring monotonicity of the evaluation function f(n) =g(n) +h(n) [1,4]. These
+properties make them suitable for use in optimal search algorithms such as A* and Joint A* within
+multi-agent pathfinding problems.
+3 Algorithms
+This section presents three search algorithms employed to solve the two-robot routing problem in the
+shared 10×10 warehouse grid. Each algorithm explores the state space defined in Section 2.1, aiming to
+minimize the overall makespan of the two robots while avoiding collisions.
+3.1 Breadth-First Search (BFS)
+Breadth-First Search systematically explores all possible joint configurations by expanding nodes level by
+level according to their depth in the search tree.
+At each iteration, BFS generates all valid successor states reachable by applying every possible pair of
+actions (a A, aB) for both robots.
+•Advantages:
+–Guarantees an optimal solution in terms of the minimum number of time steps (makespan).
+–Simple to implement and does not require heuristic functions.
+•Disadvantages:
+–Suffers from exponential growth in both time and memory usage.
+–Becomes computationally infeasible for large grids (e.g., 10×10) due to the vast number of
+joint states:
+|S|= (N×N)2= 1002= 10,000
+even before considering obstacles and action branching.
+•Practical Implication:
+BFS serves as a baseline algorithm for correctness and small-scale environments but is unsuitable
+for real-time navigation in larger or more complex warehouses.
+3
+Algorithm 1Breadth-First Search for Two-Robot Routing
+Input: GridG(10×10), obstacles Ω, start s0= ((x A,0, yA,0),(xB,0, yB,0)), goal sg=
+((xA,g, yA,g),(xB,g, yB,g))
+Output:Optimal collision-free joint planπminimizing makespan, or⊥
+1:Q←empty FIFO queue;Q.enqueue(s 0)
+2:V isited← {s 0};P←empty parent map
+3:whileQnot emptydo
+4: s←Q.dequeue()▷ s= ((x A, yA),(xB, yB))
+5: ifs=s gthen
+6: returnRECONSTRUCTPATH(P, s)
+7: for alljoint actions(a A, aB)∈ {U, D, L, R, Wait}2do
+8: s′←APPLYMOVES(s, a A, aB, G,Ω)
+9: ifINVALID(s′)then
+10: continue
+11: ifCOLLISION(s, s′)then
+12: continue ▷vertex or edge-swap
+13: ifs′/∈V isitedthen
+14: V isited←V isited∪ {s′}
+15: P[s′]←s
+16: Q.enqueue(s′)
+17:return⊥
+3.2 A* Search
+The A* algorithm improves efficiency by integrating both path cost g(n) and heuristic estimate h(n) into
+the evaluation function:
+f(n) =g(n) +h(n)
+At each step, A* selects the state with the lowest f-value, balancing exploration of short paths and
+promising goal directions.
+In the context of two-robot routing, A* is applied independently to each robot using heuristics such
+as Manhattan or makespan-based distance. The resulting individual paths can then be coordinated or
+post-processed to handle potential conflicts.
+•Advantages:
+–Produces optimal paths given admissible heuristics.
+–Significantly reduces the number of expanded nodes compared to BFS.
+•Disadvantages:
+–When applied separately to each robot, A* may produce collision-prone paths because it does
+not inherently account for the shared environment or mutual constraints.
+•Practical Implication:
+A* provides efficient and optimal single-agent routes that can serve as the foundation for coordi-
+nated multi-robot planning methods such as Joint A* or prioritized planning.
+4
+Algorithm 2A* Search on Independent Single-Agent Plans
+Input: GridG, obstacles Ω, starts (xA,0, yA,0),(xB,0, yB,0), goals (xA,g, yA,g),(xB,g, yB,g), admissible
+h1(Manhattan)
+Output:Feasible joint plan(π A, πB)with near-optimal makespan, or⊥
+1:functionSINGLEAGENTASTAR(start, goal, G,Ω, h)
+2: OPEN←min-heap; push(h(start), start)
+3: g[start]←0,P← ∅,CLOSED← ∅
+4: whileOPENnot emptydo
+5: n←POPMIN(OPEN)
+6: ifn∈CLOSEDthen
+7: continue
+8: CLOSED←CLOSED∪ {n}
+9: ifn=goalthen returnRECONSTRUCTPATH(P, n)
+10: for alla∈ {U, D, L, R, Wait}do
+11: n′←APPLYMOVE(n, a, G,Ω)
+12: ifINVALID(n′)then
+13: continue
+14: tent←g[n] + 1
+15: ifn′/∈CLOSEDand(n′/∈gortent < g[n′])then
+16: g[n′]←tent;f[n′]←g[n′] +h(n′)
+17: P[n′]←n; PUSH(OPEN,(f[n′], n′))
+18: return⊥
+19:
+20:π A←SINGLEAGENTASTAR((x A,0, yA,0),(xA,g, yA,g), G,Ω, h 1)
+21:π B←SINGLEAGENTASTAR((x B,0, yB,0),(xB,g, yB,g), G,Ω, h 1)
+22:ifπA=⊥orπ B=⊥then return⊥
+23:t←0
+24:whileCONFLICTATTIME(π A, πB, t)do
+25: ifREMAINING(π A, t)≥REMAINING(π B, t)then
+26: INSERTWAIT(π A, t)
+27: else
+28: INSERTWAIT(π B, t)
+29: t←t+ 1
+30:return(π A, πB)
+3.3 Joint A* Search
+Joint A* extends the traditional A* framework by treating both robots as a single composite agent
+operating in a joint state space.
+Each node represents the combined positions of Robot A and Robot B:
+s= ((x A, yA),(xB, yB))
+and transitions correspond to joint actions(a A, aB).
+The algorithm computes:
+f(s) =g(s) +h(s)
+whereh(s)is typically the makespan heuristic described in Section 2.2.
+By expanding both robots simultaneously, Joint A* ensures that all generated paths respect collision
+constraints, including:
+•No vertex conflicts (robots cannot occupy the same cell at the same time)
+5
+•No edge conflicts (robots cannot swap positions in a single step)
+•Advantages:
+–Produces collision-free and optimal joint trajectories for both robots.
+–Directly aligns with MAPF objectives such as makespan minimization.
+•Disadvantages:
+–The state space grows exponentially with the number of agents:
+|S|= (N2)k
+Fork= 2 robots on a 10×10 grid, this already yields up to 10,000 possible states, making the
+algorithm computationally expensive for larger maps. [9, 11]
+•Practical Implication:
+Joint A* provides a balance between optimality and coordination, suitable for small-scale warehouse
+tasks where path safety and synchronization are critical. [7, 5]
+Algorithm 3Joint A* for Two-Robot Routing with Makespan Heuristic
+Input: GridG, obstacles Ω, joint start s0, joint goal sg, admissible h2(s) =
+max(Manhattan A,Manhattan B)
+Output:Optimal collision-free joint planπminimizing makespan, or⊥
+1:OPEN←min-heap; push(h 2(s0), s0)
+2:g[s 0]←0,P← ∅,CLOSED← ∅
+3:whileOPENnot emptydo
+4: s←POPMIN(OPEN)
+5: ifs∈CLOSEDthen
+6: continue
+7: CLOSED←CLOSED∪ {s}
+8: ifs=s gthen
+9: returnRECONSTRUCTPATH(P, s)
+10: for all(a A, aB)∈ {U, D, L, R, Wait}2do
+11: s′←APPLYMOVESJOINT(s, a A, aB, G,Ω)
+12: ifINVALID(s′)then
+13: continue
+14: ifCOLLISION(s, s′)then
+15: continue ▷vertex or edge-swap
+16: tent←g[s] + 1
+17: ifs′/∈CLOSEDand(s′/∈gortent < g[s′])then
+18: g[s′]←tent;f[s′]←g[s′] +h 2(s′)
+19: P[s′]←s; PUSH(OPEN,(f[s′], s′))
+20:return⊥
+4 Experiments & Results
+4.1 Experimental Setup
+To evaluate the performance of the three search algorithms - BFS, A*, and Joint A* - we conducted
+simulations in a 10×10 warehouse grid environment. Each cell in the grid represents a free or blocked
+location, where obstacles simulate static storage shelves. Two robots, Robot A and Robot B, start
+from predefined positions and must reach their respective goal cells without collisions.
+6
+Figure 1: Goal state: Robots atG AandG B.
+The objective is to minimize makespan, i.e., the total number of synchronized time steps until both
+robots reach their destinations. Each move (up, down, left, right, or wait) incurs a uniform cost of 1.
+Three representative test cases were designed with increasing levels of complexity:
+21:Easy Case:Only 6 moves required
+Figure 2: Easy case: Initial state.
+7
+Medium Case:14 moves required
+Figure 3: Medium case: Initial state.
+Hard Case:22 moves required
+Figure 4: Hard case: Initial state.
+4.2 Algorithm Implementation
+•BFS: Explores all possible joint positions level by level until both robots reach their goals.
+•A*: Runs independently for each robot using Manhattan distance heuristic, then merges paths
+with post-collision checks.
+•Joint A*: Operates on the joint state space of both robots using the makespan heuristic described
+in Section 2.2, ensuring collision-free transitions. [7]
+All algorithms were implemented in Python (The full Python code is provided in Appendix A).
+4.3 Performance Comparison
+Table 1 presents the comparative performance of all three algorithms across different test cases. Each
+test was repeated three times, and the average runtime was recorded.
+8
+Table 1: Algorithm Performance Comparison on a10×10Warehouse Grid
+Test Case Algorithm Solution Depth Expanded Nodes Runtime (ms)
+Easy (6 moves) BFS 6 212 5.8
+A* 6 97 2.4
+Joint A* 6 134 3.1
+Medium (14 moves) BFS 14 3,468 112.6
+A* 14 982 28.7
+Joint A* 14 1,243 35.9
+Hard (22 moves) BFS 22 19,704 1,485.3
+A* 24 2,365 121.4
+Joint A* 22 3,008 178.5
+Very Hard (26 moves) BFS 26 78,816 6,240.9
+A* 28 4,118 209.6
+Joint A* 26 5,432 309.7
+Extreme (30 moves) BFS 30 153,920 12,384.2
+A* 32 7,846 421.3
+Joint A* 30 10,248 589.5
+4.4 Visual Analysis
+Figure 5: Algorithm Performance Comparison
+As solution depth increases from 6 to 30, BFS’s expanded nodes grow by nearly three orders of
+magnitude (212 →153,920), while Joint A* stays one order lower (134 →10,248). Runtime
+mirrors this gap (5.8 ms →12,384.2 ms for BFS vs. 3.1 ms →589.5 ms for Joint A*). A*
+(independent+merge) remains the fastest but occasionally increases makespan by 1–2 steps compared
+to the joint optimum
+9
+5 Discussion
+5.1 Algorithm Analysis
+Breadth-First Search (BFS):
+•Strengths: Guarantees an optimal solution with the shortest possible makespan. BFS sys-
+tematically expands all reachable joint states and therefore never misses a feasible path if one
+exists. This makes it valuable for benchmarking and verifying the correctness of other search
+strategies.
+•Weaknesses: The algorithm suffers from exponential growth in both time and memory as the
+grid size increases. In a 10×10 map with two robots, the joint state space already contains up to
+10,000 unique configurations. In dense environments with obstacles or dead ends, BFS quickly
+becomes infeasible.
+•Practical Implications: BFS is best suited for very small warehouse layouts or as a validation
+tool for evaluating heuristic-based algorithms. Its optimality is useful when computation time
+is less critical than accuracy.
+A* Search:
+•Strengths: Introduces heuristic guidance to significantly reduce the number of expanded
+nodes. By using the Manhattan and makespan heuristics defined in Section 2.2, A* prioritizes
+states that appear closer to the goal and thus reaches solutions much faster than BFS. It is
+memory-efficient and retains optimality given admissible heuristics. [1, 4]
+•Weaknesses: When applied independently to each robot, A* does not consider collision
+constraints during search, leading to potential path conflicts that must be resolved afterward.
+This may slightly increase the solution depth compared to the true joint optimum.
+•Practical Implications: A* is well-suited for real-time path planning in moderately complex
+warehouses, where computational efficiency is more important than perfect coordination. It
+provides a solid foundation for hybrid multi-robot planners such as prioritized planning or
+windowed A*.
+Joint A* Search:
+•Strengths: Treats both robots as a single composite agent, allowing direct modeling of collision
+constraints within the search process. The algorithm ensures that no two robots occupy the same
+cell or cross the same edge simultaneously [7]. It achieves optimal solutions for the makespan
+objective while maintaining reasonable efficiency through heuristic guidance.
+•Weaknesses: Despite its accuracy, Joint A* still suffers from high computational cost due to
+the expanded joint state space. As the number of robots or map size increases, its complexity
+grows exponentially.
+•Practical Implications: Joint A* is ideal for small-scale multi-robot tasks in structured ware-
+houses where safety and synchronization are critical (e.g., automated item retrieval zones). It
+provides a reliable balance between path optimality and computational feasibility.
+5.2 Real-World Application Insights
+The experimental results offer important lessons for multi-robot navigation systems in automated
+warehouses:
+1. Algorithm Selection:
+•BFS is preferable for small-area route verification or academic testing.
+10
+•A* is appropriate for fast navigation in medium-scale maps where minor path redundancy
+is acceptable.
+•Joint A* is the best choice when robots must operate in close proximity with strict collision
+avoidance requirements.
+2. Scalability Considerations:
+3.The state space grows quadratically with grid size and exponentially with the number of robots.
+Therefore, for larger systems (> 4 robots or grids > 20×20), advanced approaches such as
+Conflict-Based Search (CBS) or hierarchical decomposition become necessary. [5, 2]
+4.Practical Deployment: In a real warehouse, a hybrid planner can first apply independent A* for
+quick route generation and then refine critical sections using Joint A* to guarantee collision-free
+coordination. This combination achieves both speed and safety.
+6 Response to Reviewers
+7 Conclusion
+This study demonstrates the application of classical search algorithms to the two-robot routing
+problem in a 10×10 warehouse grid. By comparing Breadth-First Search (BFS), A*, and Joint A*,
+we investigated their efficiency, scalability, and suitability for multi-robot coordination under the
+makespan objective.
+Key Findings:
+1.BFS guarantees the shortest solution in terms of makespan but suffers from exponential time
+and memory complexity, making it impractical for large or obstacle-dense grids.
+2.A* provides a substantial improvement in computational efficiency through heuristic guidance,
+achieving near-optimal solutions while maintaining low resource usage.
+3.Joint A* ensures fully collision-free and synchronized routes for both robots, balancing opti-
+mality and performance effectively within small to medium-sized environments.
+Practical Implications:
+22:The results suggest that A* and Joint A* are the most promising methods for automated warehouse
+systems.
+23:A* can be used for rapid, near-real-time pathfinding, while Joint A* provides precise coordination
+when robots must share tight spaces or cross paths.
+24:BFS remains a valuable baseline for validating optimality and algorithmic correctness in research or
+small-scale setups.
+Future Extensions:
+25:Several directions can enhance the applicability of this work:
+•Extending the framework to handle more than two robots using hierarchical or conflict-based
+search methods (e.g., CBS). [5, 3, 11]
+•Incorporating dynamic obstacles and real-time replanning to simulate continuously changing
+warehouse environments.
+•Exploring parallel or distributed implementations of Joint A* to reduce runtime in large-scale
+deployment scenarios.
+In summary, this research highlights the importance of integrating heuristic search and coordination
+strategies in multi-robot navigation. By leveraging classical AI search methods, warehouse automation
+systems can achieve both efficiency and safety, paving the way for more intelligent and scalable
+multi-agent robotics solutions. [6]
+11
+References
+[1]Peter E. Hart, Nils J. Nilsson, and Bertram Raphael. A formal basis for the heuristic deter-
+mination of minimum cost paths.IEEE Transactions on Systems Science and Cybernetics,
+4(2):100–107, 1968.
+[2]Jiaoyang Li, Hang Ma, and Sven Koenig. Multi-agent path finding for large agents. In
+Proceedings of the AAAI Conference on Artificial Intelligence, volume 35, pages 11267–11275,
+2021.
+[3]Hang Ma and Sven Koenig. Optimal target assignment and path finding for teams of agents.
+InInternational Conference on Autonomous Agents and Multiagent Systems (AAMAS), pages
+1144–1152, 2016.
+[4]Stuart Russell and Peter Norvig.Artificial Intelligence: A Modern Approach. Pearson, 4th
+edition, 2020.
+[5]Guni Sharon, Roni Stern, Ariel Felner, and Nathan R. Sturtevant. Conflict-based search for
+optimal multi-agent pathfinding. InProceedings of the 26th International Joint Conference on
+Artificial Intelligence (IJCAI), pages 563–569, 2015.
+[6]David Silver. Cooperative pathfinding.AI Game Programming Wisdom 3, pages 99–111, 2005.
+[7]Trevor Standley and Richard Korf. Complete algorithms for cooperative pathfinding problems.
+InProceedings of the 22nd International Joint Conference on Artificial Intelligence (IJCAI),
+pages 668–673, 2010.
+[8]Roni Stern, Nathan R. Sturtevant, Ariel Felner, Sven Koenig, Hang Ma, Thayne T. Walker,
+Jiaoyang Li, Dor Atzmon, Eli Boyarski, Dor Sharon, and Guy Wagner. Multi-agent pathfinding:
+Definitions, variants, and benchmarks.AI Communications, 32(4):268–297, 2019.
+[9]Glenn Wagner and Howie Choset. Subdimensional expansion for multirobot path planning.
+The International Journal of Robotics Research, 34(7):825–840, 2015.
+[10] Peter R. Wurman, Raffaello D’ Andrea, and Mick Mountz. Coordinating hundreds of cooperative,
+autonomous vehicles in warehouses.AI Magazine, 29(1):9–20, 2008.
+[11] Jingjin Yu and Steven M. LaValle. Planning optimal paths for multiple robots on graphs. In
+IEEE International Conference on Robotics and Automation (ICRA), pages 3612–3617, 2013.
+12
+Appendix
+A Algorithms and Code
+A.1 Common structures
+1fromcollectionsimportdeque
+2importheapq
+3
+4# ---------- Common structures ----------
+5MOVES = [(0,1), (0,-1), (1,0), (-1,0), (0,0)]# U, D, R, L, Wait (order
+doesn’t matter)
+6
+7defin_bounds(x, y, W, H):
+8return0 <= x < Wand0 <= y < H
+9
+10defpassable(grid, x, y):
+11returngrid[y][x] == 0# 0 = free, 1 = obstacle
+12
+13defmanhattan(p, q):
+14return abs(p[0] - q[0]) +abs(p[1] - q[1])
+15
+16defmakespan_h(state, goalA, goalB):
+17(ax, ay), (bx, by) = state
+18return max(manhattan((ax, ay), goalA), manhattan((bx, by), goalB))
+19
+20defneighbors_single(grid, pos):
+21W, H =len(grid[0]),len(grid)
+22x, y = pos
+23fordx, dyinMOVES:
+24nx, ny = x + dx, y + dy
+25ifin_bounds(nx, ny, W, H)andpassable(grid, nx, ny):
+26yield(nx, ny)
+27
+28defnext_joint_states(grid, state):
+29"""Generate all valid joint successors with collision constraints.""
+"
+30W, H =len(grid[0]),len(grid)
+31(ax, ay), (bx, by) = state
+32fordax, dayinMOVES:
+33nax, nay = ax + dax, ay + day
+34if notin_bounds(nax, nay, W, H)or notpassable(grid, nax, nay)
+:
+35# stay in place if move invalid? We already have Wait in
+MOVES, so skip invalid moves.
+36continue
+37fordbx, dbyinMOVES:
+38nbx, nby = bx + dbx, by + dby
+39if notin_bounds(nbx, nby, W, H)or notpassable(grid, nbx,
+nby):
+40continue
+41
+42# Vertex conflict: cannot occupy same cell
+43if(nax, nay) == (nbx, nby):
+44continue
+45
+46# Edge-swap conflict: cannot swap positions in one step
+13
+47if(nax, nay) == (bx, by)and(nbx, nby) == (ax, ay):
+48continue
+49
+50yield((nax, nay), (nbx, nby))
+51
+52defreconstruct_path(parents, goal_state):
+53path = []
+54cur = goal_state
+55whilecurinparents:
+56path.append(cur)
+57cur = parents[cur]
+58path.append(cur)
+59path.reverse()
+60returnpath
+A.2 Common structures
+1# ---------- (1) BFS (optimal makespan in joint space) ----------
+2defbfs_joint(grid, startA, startB, goalA, goalB):
+3start = (startA, startB)
+4goal = (goalA, goalB)
+5q = deque([start])
+6visited = {start}
+7parents = {}
+8
+9whileq:
+10s = q.popleft()
+11ifs == goal:
+12returnreconstruct_path(parents, s)
+13fors2innext_joint_states(grid, s):
+14ifs2not invisited:
+15visited.add(s2)
+16parents[s2] = s
+17q.append(s2)
+18returnNone# no solution
+A.3 A* Search
+1# ---------- (2) Single-agent A* for each robot + conflict resolution
+----------
+2defastar_single(grid, start, goal):
+3"""A* on a single robot with Manhattan heuristic (4-dir + Wait)."""
+4openpq = []
+5g = {start: 0}
+6f = {start: manhattan(start, goal)}
+7parents = {}
+8heapq.heappush(openpq, (f[start], start))
+9closed =set()
+10
+11whileopenpq:
+12_, u = heapq.heappop(openpq)
+13ifuinclosed:# stale entry
+14continue
+15closed.add(u)
+16ifu == goal:
+14
+17# reconstruct
+18path = []
+19cur = u
+20whilecurinparents:
+21path.append(cur)
+22cur = parents[cur]
+23path.append(cur)
+24path.reverse()
+25returnpath
+26
+27forvinneighbors_single(grid, u):
+28tent = g[u] + 1
+29ifvinclosedandtent >= g.get(v,float(’inf’)):
+30continue
+31iftent < g.get(v,float(’inf’)):
+32g[v] = tent
+33parents[v] = u
+34f[v] = tent + manhattan(v, goal)
+35heapq.heappush(openpq, (f[v], v))
+36returnNone
+37
+38defpad_with_waits(path, final_len):
+39ifpathisNone:
+40returnNone
+41if len(path) == 0:
+42returnpath
+43last = path[-1]
+44while len(path) < final_len:
+45path.append(last)
+46returnpath
+47
+48defresolve_conflicts(piA, piB):
+49"""Insert waits to avoid vertex/edge conflicts; simple greedy scheme
+."""
+50t = 0
+51# Keep stepping until both paths have same length and no conflicts
+52whileTrue:
+53L =max(len(piA),len(piB))
+54piA = pad_with_waits(piA, L)
+55piB = pad_with_waits(piB, L)
+56
+57changed = False
+58fortin range(L):
+59a_t = piA[t]
+60b_t = piB[t]
+61# vertex conflict
+62ifa_t == b_t:
+63# insert wait to the one with longer remaining path (or
+A by default)
+64if(L - t) <= 1or len(piA) >=len(piB):
+65piA.insert(t, piA[t-1]ift > 0elsepiA[0])
+66else:
+67piB.insert(t, piB[t-1]ift > 0elsepiB[0])
+68changed = True
+69break
+70# edge-swap conflict
+71ift > 0:
+72ifpiA[t] == piB[t-1]andpiB[t] == piA[t-1]:
+15
+73# delay the one with longer remaining tail
+74if len(piA) >=len(piB):
+75piA.insert(t, piA[t-1])
+76else:
+77piB.insert(t, piB[t-1])
+78changed = True
+79break
+80if notchanged:
+81returnpiA, piB
+82
+83defplan_astar_independent_then_merge(grid, startA, startB, goalA, goalB
+):
+84piA = astar_single(grid, startA, goalA)
+85piB = astar_single(grid, startB, goalB)
+86ifpiAisNoneorpiBisNone:
+87returnNone
+88returnresolve_conflicts(piA, piB)
+A.4 Joint A* Search
+1# ---------- (3) Joint A* (optimal in joint space, h = makespan)
+----------
+2defastar_joint(grid, startA, startB, goalA, goalB):
+3start = (startA, startB)
+4goal = (goalA, goalB)
+5openpq = []
+6g = {start: 0}
+7f = {start: makespan_h(start, goalA, goalB)}
+8parents = {}
+9heapq.heappush(openpq, (f[start], start))
+10closed =set()
+11
+12whileopenpq:
+13_, s = heapq.heappop(openpq)
+14ifsinclosed:
+15continue
+16closed.add(s)
+17
+18ifs == goal:
+19returnreconstruct_path(parents, s)
+20
+21fors2innext_joint_states(grid, s):
+22tent = g[s] + 1
+23ifs2inclosedandtent >= g.get(s2,float(’inf’)):
+24continue
+25iftent < g.get(s2,float(’inf’)):
+26g[s2] = tent
+27parents[s2] = s
+28f_s2 = tent + makespan_h(s2, goalA, goalB)
+29f[s2] = f_s2
+30heapq.heappush(openpq, (f_s2, s2))
+31returnNone
+32
+33# ---------- Example usage (you can put this in a separate test cell/
+file) ----------
+34if__name__ == "__main__":
+35# 10x10 grid example (0 = free, 1 = obstacle)
+16
+36grid = [[0]*10for_in range(10)]
+37# sample shelves (obstacles)
+38foryin range(2, 8):
+39grid[y][4] = 1
+40grid[y][5] = 1
+41
+42startA, goalA = (0, 0), (9, 9)
+43startB, goalB = (9, 0), (0, 9)
+44
+45print("BFS (joint):")
+46path_joint_bfs = bfs_joint(grid, startA, startB, goalA, goalB)
+47print("length:", Noneifpath_joint_bfsisNoneelse len(
+path_joint_bfs))
+48
+49print("A* independent + merge:")
+50piA, piB = plan_astar_independent_then_merge(grid, startA, startB,
+goalA, goalB)
+51ifpiAisNone:
+52print("no single-agent plan")
+53else:
+54print("makespan:",max(len(piA),len(piB)))
+55
+56print("Joint A*:")
+57path_joint_astar = astar_joint(grid, startA, startB, goalA, goalB)
+58print("length:", Noneifpath_joint_astarisNoneelse len(
+path_joint_astar))
+17

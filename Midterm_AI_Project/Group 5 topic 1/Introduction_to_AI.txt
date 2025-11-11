@@ -1,0 +1,210 @@
+NATIONAL ECONOMICS UNIVERSITY
+Hanoi College of Technology
+INTRODUCTION TO AI (TOKT11121.AI66A)
+REPORT
+Instructor: Nguyễn Trọng Nghĩa
+Student: Trần Tuấn Anh - 11247264
+Hoàng Thị Ngọc Hân - 11247286
+Nguyễn Phùng Hóa - 11247290
+Nguyễn Hoàng Tuấn - 11247363
+Hà Nội, ngày 17 tháng 10 năm 2025
+Contents
+1 Introduction 3
+2 Method & Experiment 3
+2.1 Problem definition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.2 Algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2.2.1 BFS (Breadth-First Search) . . . . . . . . . . . . . . . . . . . . . 4
+2.2.2 Greedy Best-First Search (GBFS) . . . . . . . . . . . . . . . . . . 4
+2.2.3 A* (A-star) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.3 Pseudo-code notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+3 Evaluation & Description 7
+4 Conclusion 7
+5 Discuss 8
+5.1 Về heuristic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+5.2 Mở rộng thực tế . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+5.3 Tác động và ứng dụng . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+6 References 9
+2
+1 Introduction
+Trong thời đại công nghệ số và thương mại điện tử phát triển mạnh mẽ, các công ty giao
+hàng (delivery, logistics) đối mặt với một bài toán cơ bản nhưng vô cùng quan trọng:
+làm thế nào để tối ưu hóa lộ trình vận chuyển hàng hóa từ kho đến các điểm giao sao
+cho tổng chi phí thấp nhất và thời gian nhanh nhất. Đây không chỉ là vấn đề về giao
+thông hay bản đồ, mà là một bài toán tối ưu trong trí tuệ nhân tạo (AI) — thuộc nhóm
+tìm kiếm có thông tin (Informed Search).
+Bài toán này có thể được mô hình hóa bằng đồ thị (graph), trong đó:
+•Đỉnh (node) đại diện cho các địa điểm giao hàng (kho, trung tâm, khách hàng);
+•Cạnh (edge) thể hiện quãng đường hoặc chi phí di chuyển giữa hai địa điểm;
+•Trọng số (weight) của cạnh thể hiện độ dài quãng đường, chi phí nhiên liệu hoặc
+thời gian giao hàng.
+Mục tiêu là tìm đường đi ngắn nhất từ điểm khởi đầu (I) đến điểm đích (A). Trong báo
+cáo này, chúng ta mô phỏng một đồ thị với các nút B, C, D, E, F, G, K, M làm các điểm
+trung gian mà xe có thể ghé qua.
+2 Method & Experiment
+2.1 Problem definition
+Công ty giao hàng cần tìm tuyến đường tối ưu từ điểm xuất phát I (kho hàng) đến điểm
+đích A (khách hàng cuối cùng). Mỗi cạnh có chi phí di chuyển𝑔(𝑛)(vd: khoảng cách
+hay thời gian lái), và mỗi nút có một giá trị heuristicℎ(𝑛)(vd: thời gian dừng tại điểm
+đó hoặc ước lượng khoảng cách đến đích).
+Mục tiêu:Minimize tổng chi phíÍ𝑔(𝑛)dọc theo đường đi từ I đến A.
+2.2 Algorithms
+Trong báo cáo này ta triển khai và so sánh ba thuật toán:
+1. BFS (Breadth-First Search)
+2. GBFS (Greedy Best-First Search)
+3. A* (A-star)
+3
+2.2.1 BFS (Breadth-First Search)
+BFS là thuật toán duyệt theo chiều rộng. Nếu các cạnh có trọng số bằng
+nhau (hoặc ta chỉ cần số bước tối thiểu), BFS sẽ tìm đường đi có số bước
+ít nhất.
+Ưu điểm:
+•Dễ cài đặt.
+•Tìm được đường đi ngắn nhất trong đồ thị vô trọng số.
+Nhược điểm:
+•Không phù hợp với đồ thị có trọng số khác nhau.
+•Tốn bộ nhớ và thời gian khi đồ thị lớn do mở rộng theo tầng.
+Algorithm 1 Breadth-First Search (BFS)
+Require: start node𝑠, goal node𝑡
+1:𝑞𝑢𝑒𝑢𝑒←[𝑠]⊲FIFO queue
+2:𝑣𝑖𝑠𝑖𝑡𝑒𝑑←{𝑠}
+3:𝑝𝑎𝑟𝑒𝑛𝑡[𝑠]←NIL
+4:while𝑞𝑢𝑒𝑢𝑒not empty do
+5:𝑣←Dequeue(𝑞𝑢𝑒𝑢𝑒)
+6:if𝑣=𝑡then
+7:return ReconstructPath(𝑝𝑎𝑟𝑒𝑛𝑡,𝑡)
+8:end if
+9:for each neighbor𝑢of𝑣do
+10:if𝑢∉𝑣𝑖𝑠𝑖𝑡𝑒𝑑then
+11:add𝑢to𝑣𝑖𝑠𝑖𝑡𝑒𝑑
+12:𝑝𝑎𝑟𝑒𝑛𝑡[𝑢]←𝑣
+13:Enqueue(𝑞𝑢𝑒𝑢𝑒,𝑢)
+14:end if
+15:end for
+16:end while
+17:return FAILURE
+2.2.2 Greedy Best-First Search (GBFS)
+GBFS chọn nút để mở rộng dựa trên giá trị heuristicℎ(𝑛)nhỏ nhất, nghĩa
+là luôn đi theo nút có vẻ gần đích nhất theo ước lượng.
+Ưu điểm:
+4
+•Thường tìm đường nhanh (ít nút được mở rộng) nếu heuristic tốt.
+Nhược điểm:
+•Không đảm bảo tìm đường ngắn nhất (vì bỏ qua chi phí thực tế𝑔(𝑛)).
+•Dễ mắc kẹt local minima nếu heuristic sai lệch.
+Algorithm 2 Greedy Best-First Search (GBFS)
+Require: start𝑠, goal𝑡, heuristicℎ(·)
+1:open←𝑝𝑟𝑖𝑜𝑟𝑖𝑡𝑦𝑞𝑢𝑒𝑢𝑒𝑜𝑟𝑑𝑒𝑟𝑒𝑑𝑏𝑦h(n)
+2:Insert(open,𝑠)
+3:𝑝𝑎𝑟𝑒𝑛𝑡[𝑠]←NIL
+4:𝑣𝑖𝑠𝑖𝑡𝑒𝑑←∅
+5:while open not empty do
+6:𝑣←ExtractMin(open)⊲node with smallestℎ
+7:if𝑣=𝑡then
+8:return ReconstructPath(𝑝𝑎𝑟𝑒𝑛𝑡,𝑡)
+9:end if
+10:if𝑣∉𝑣𝑖𝑠𝑖𝑡𝑒𝑑then
+11:add𝑣to𝑣𝑖𝑠𝑖𝑡𝑒𝑑
+12:for each neighbor𝑢of𝑣do
+13:if𝑢∉𝑣𝑖𝑠𝑖𝑡𝑒𝑑then
+14:𝑝𝑎𝑟𝑒𝑛𝑡[𝑢]←𝑣
+15:Insert(open,𝑢)
+16:end if
+17:end for
+18:end if
+19:end while
+20:return FAILURE
+2.2.3 A* (A-star)
+A* sử dụng hàm đánh giá𝑓(𝑛)=𝑔(𝑛)+ℎ(𝑛), trong đó𝑔(𝑛)là chi phí
+thực tế từ start đến nút𝑛, vàℎ(𝑛)là heuristic ước lượng chi phí từ𝑛đến
+goal. Nếuℎlà admissible (không đánh giá quá cao), A* sẽ tìm đường tối
+ưu.
+Ưu điểm:
+•Nếu heuristic thỏa điều kiện admissible và consistent, A* tìm được
+đường ngắn nhất.
+5
+•Thường mở rộng ít nút hơn BFS.
+Nhược điểm:
+•Tốn bộ nhớ (lưu open/closed lists).
+•Hiệu suất phụ thuộc vào chất lượng heuristic.
+Algorithm 3 A* Search
+Require: start𝑠, goal𝑡, heuristicℎ(·)
+1:𝑜𝑝𝑒𝑛←priority queue ordered by𝑓(𝑛)=𝑔(𝑛)+ℎ(𝑛)
+2:𝑔[𝑠]←0
+3:Insert(open,𝑠with priority𝑓(𝑠)=ℎ(𝑠))
+4:𝑝𝑎𝑟𝑒𝑛𝑡[𝑠]←NIL
+5:𝑐𝑙𝑜𝑠𝑒𝑑←∅
+6:while open not empty do
+7:𝑣←ExtractMin(open)
+8:if𝑣=𝑡then
+9:return ReconstructPath(𝑝𝑎𝑟𝑒𝑛𝑡,𝑡)
+10:end if
+11:add𝑣to𝑐𝑙𝑜𝑠𝑒𝑑
+12:for each neighbor𝑢of𝑣with edge cost𝑤(𝑣,𝑢)do
+13:𝑡𝑒𝑛𝑡𝑎𝑡𝑖𝑣𝑒_𝑔←𝑔[𝑣]+𝑤(𝑣,𝑢)
+14:if𝑢∈𝑐𝑙𝑜𝑠𝑒𝑑and𝑡𝑒𝑛𝑡𝑎𝑡𝑖𝑣𝑒_𝑔≥𝑔[𝑢]then
+15:continue
+16:end if
+17:if𝑢∉𝑜𝑝𝑒𝑛or𝑡𝑒𝑛𝑡𝑎𝑡𝑖𝑣𝑒_𝑔<𝑔[𝑢]then
+18:𝑝𝑎𝑟𝑒𝑛𝑡[𝑢]←𝑣
+19:𝑔[𝑢]←𝑡𝑒𝑛𝑡𝑎𝑡𝑖𝑣𝑒_𝑔
+20:𝑓[𝑢]←𝑔[𝑢]+ℎ(𝑢)
+21:if𝑢∉𝑜𝑝𝑒𝑛then
+22:Insert(open,𝑢with priority𝑓[𝑢])
+23:else
+24:DecreaseKey(open,𝑢,𝑓[𝑢])
+25:end if
+26:end if
+27:end for
+28:end while
+29:return FAILURE
+2.3 Pseudo-code notes
+Các thuật toán trên đã được viết dưới dạng pseudo-code; nếu bạn có đoạn
+mã Python/Java/C++ cụ thể, mình có thể chuyển nguyên xi vào môi
+trường algorithm hoặc sử dụng lstlisting nếu muốn hiển thị code thực thi.
+6
+3 Evaluation & Description
+Để đánh giá, ta có thể thực hiện các bước:
+1. Thiết kế một đồ thị mẫu (ví dụ hình minh họa), gán trọng số cạnh
+và heuristic cho các nút.
+2. Chạy từng thuật toán trên cùng một đồ thị, ghi lại: đường tìm được,
+tổng chi phí, số nút mở rộng, thời gian chạy.
+3. So sánh về độ chính xác (đường tối ưu hay không), hiệu suất (thời
+gian, bộ nhớ), và tính ổn định khi heuristic thay đổi.
+Figure 1: Ví dụ đồ thị giao hàng (placeholder).
+4 Conclusion
+Ba thuật toán BFS, GBFS và A* đều thuộc nhóm các thuật toán tìm kiếm
+trên đồ thị. BFS là cơ bản và phù hợp với đồ thị vô trọng số; GBFS nhanh
+7
+nếu heuristic tốt nhưng không đảm bảo tối ưu; A* là lựa chọn cân bằng
+khi có heuristic admissible — nó đảm bảo tìm đường tối ưu và thường hiệu
+quả hơn so với duyệt toàn bộ.
+Trong thực tế, các hệ thống lớn (ví dụ tối ưu lộ trình cho nhiều xe, bản
+đồ động) thường kết hợp A* cho các đoạn cục bộ với các meta-heuristic
+(GA, Ant Colony) để tối ưu tổng lộ trình.
+5 Discuss
+5.1 Về heuristic
+Hiệu quả của A* phụ thuộc rất lớn vào độ chính xác của hàm heuristic.
+Nếu h(n) được xác định bằng khoảng cách Euclid hoặc Manhattan trên
+bản đồ, A* hoạt động nhanh và chính xác. Nếu heuristic bị đánh giá quá
+cao, A* có thể trở nên không tối ưu; nếu quá thấp, nó sẽ hoạt động như
+Dijkstra và chậm hơn.
+5.2 Mở rộng thực tế
+Trong ứng dụng giao hàng quy mô lớn: Có thể áp dụng A* cho từng đoạn
+ngắn (micro-routing), sau đó dùng meta-heuristic (như Genetic Algorithm
+hoặc Ant Colony) để tối ưu tổng lộ trình.
+Với bản đồ động (tắc đường, thay đổi chi phí), có thể dùng D* hoặc
+A*-Lite, cho phép cập nhật đường đi trong thời gian thực.
+5.3 Tác động và ứng dụng
+A* là nền tảng cho các hệ thống định tuyến hiện đại như Google Maps,
+Grab, UPS Route Optimization, robot tự hành.
+Giúp tiết kiệm nhiên liệu, giảm thời gian vận chuyển, giảm chi phí
+logistics.
+Trong AI, bài toán này còn mở rộng thành Path Planning trong robot,
+game, hoặc mô phỏng thành phố thông minh.
+8
+6 References
+1. AlbertEinstein. “Ontheelectrodynamicsofmovingbodies”. Annalen
+der Physik 17 (1905), pp. 891–921.
+2. Stuart J. Russell and Peter Norvig. Artificial Intelligence: A Modern
+Approach. 4th ed., Pearson, 2020. ISBN: 9780134610993.
+9
