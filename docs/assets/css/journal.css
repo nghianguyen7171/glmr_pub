@@ -1,0 +1,255 @@
+:root {
+  --glmr-bg: #f6f7fb;
+  --glmr-panel: #ffffff;
+  --glmr-text: #1f2a37;
+  --glmr-muted: #6b7280;
+  --glmr-accent: #f15a24;
+  --glmr-accent-dark: #c2410c;
+  --glmr-border: #e5e7eb;
+  --glmr-shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--glmr-bg);
+  color: var(--glmr-text);
+}
+
+a {
+  color: var(--glmr-accent-dark);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.journal-hero {
+  position: relative;
+  background: linear-gradient(135deg, #202938 0%, #111827 60%);
+  color: #f9fafb;
+  padding: 48px 0 64px;
+  overflow: hidden;
+}
+
+.hero-ribbon {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(241, 90, 36, 0.55), transparent 55%),
+    radial-gradient(circle at bottom left, rgba(255, 135, 46, 0.4), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.pub-badge {
+  background: rgba(241, 90, 36, 0.12);
+  color: #fef3c7;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(241, 90, 36, 0.35);
+  font-weight: 600;
+}
+
+.pub-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: 6px;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hero-lead {
+  font-family: "Source Serif Pro", "Times New Roman", serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0;
+  color: rgba(249, 250, 251, 0.82);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f9fafb;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+}
+
+.hero-link:hover {
+  background: rgba(241, 90, 36, 0.9);
+  border-color: rgba(241, 90, 36, 0.9);
+}
+
+.journal-content {
+  max-width: 960px;
+  margin: -48px auto 96px;
+  padding: 0 32px;
+}
+
+.content-panel {
+  background: var(--glmr-panel);
+  border-radius: 20px;
+  box-shadow: var(--glmr-shadow);
+  padding: 48px 56px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.content-panel h1,
+.content-panel h2,
+.content-panel h3 {
+  font-family: "Source Serif Pro", "Times New Roman", serif;
+  margin-top: 0;
+  color: var(--glmr-text);
+}
+
+.content-panel h2 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.content-panel p {
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.content-panel ul,
+.content-panel ol {
+  padding-left: 22px;
+  line-height: 1.7;
+}
+
+.content-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 24px 0;
+  box-shadow: inset 0 0 0 1px var(--glmr-border);
+}
+
+.content-panel th,
+.content-panel td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.content-panel thead {
+  background: rgba(241, 90, 36, 0.08);
+  color: var(--glmr-text);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+.content-panel tbody tr:nth-child(odd) {
+  background: rgba(249, 250, 251, 0.7);
+}
+
+.content-panel tbody tr:hover {
+  background: rgba(241, 90, 36, 0.08);
+}
+
+.content-panel table a {
+  font-weight: 600;
+  color: var(--glmr-accent-dark);
+}
+
+.content-panel blockquote {
+  border-left: 4px solid var(--glmr-accent);
+  padding-left: 18px;
+  color: var(--glmr-muted);
+  font-style: italic;
+}
+
+.journal-footer {
+  background: #111827;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-inner p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: #fff5eb;
+}
+
+@media (max-width: 720px) {
+  .hero-inner {
+    padding: 0 20px;
+  }
+
+  .journal-content {
+    padding: 0 20px;
+    margin-top: -32px;
+  }
+
+  .content-panel {
+    padding: 32px 28px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

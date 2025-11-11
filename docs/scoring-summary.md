@@ -1,4 +1,9 @@
-# Midterm Scoring Summary
+---
+layout: journal
+title: Midterm Scoring Summary
+hero_title: Performance & Evaluation Snapshot
+hero_lead: "Combined presentation and report scores guiding editorial highlights for Searching Strategy and Its Application."
+---
 
 ## Methodology
 - Converted presentation `rank` values from `presentation_raking.csv` to a 10-point scale (1 → 9, 2 → 8, 3 → 7). Blank ranks were treated as 8.

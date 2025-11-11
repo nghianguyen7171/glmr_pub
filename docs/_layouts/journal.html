@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/journal.css' | relative_url }}" />
+    {% if site.google_analytics %}
+      {% include google-analytics.html %}
+    {% endif %}
+    {% include head-custom.html %}
+  </head>
+  <body>
+    <header class="journal-hero">
+      <div class="hero-ribbon"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <span class="pub-badge">{{ site.title }}</span>
+          <span class="pub-subtitle">{{ site.description }}</span>
+        </div>
+        <h1 class="hero-title">{{ page.hero_title | default: page.title }}</h1>
+        {% if page.hero_lead %}
+          <p class="hero-lead">{{ page.hero_lead }}</p>
+        {% endif %}
+        <nav class="hero-actions">
+          <a class="hero-link" href="{{ '/' | relative_url }}">Home</a>
+          <a class="hero-link" href="{{ '/issue-1.html' | relative_url }}">Current Issue</a>
+          <a class="hero-link" href="{{ '/scoring-summary.html' | relative_url }}">Scoring Summary</a>
+          <a class="hero-link" href="{{ site.github.repository_url }}">Repository</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="journal-content">
+      <article class="content-panel">
+        {{ content }}
+      </article>
+    </main>
+
+    <footer class="journal-footer">
+      <div class="footer-inner">
+        <div>
+          <strong>{{ site.title }}</strong>
+          <p>Lecture Note in Fundametal AI · {{ "now" | date: "%Y" }}</p>
+        </div>
+        <div class="footer-links">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/issue-1.html' | relative_url }}">Issue 1</a>
+          <a href="{{ '/scoring-summary.html' | relative_url }}">Scoring</a>
+          <a href="{{ site.github.repository_url }}">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

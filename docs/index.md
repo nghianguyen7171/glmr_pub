@@ -1,4 +1,11 @@
-Welcome to **GlennMurray Published (GLMR)**, a lecture-note style journal curated for the Introduction to AI course. Our current issue, **Searching Strategy and Its Application**, assembles every midterm presentation and report from the 2025 cohort so the class can archive, reference, and celebrate their work.
+---
+layout: journal
+title: Lecture Note in Fundametal AI
+hero_title: Lecture Note in Fundametal AI
+hero_lead: "An Elsevier-inspired course publication curating the midterm work on searching strategies and applications from the 2025 Introduction to AI cohort."
+---
+
+Welcome to **GlennMurray Published (GLMR)**, a lecture-note style journal for the Introduction to AI course. Our current issue, **Searching Strategy and Its Application**, assembles every midterm presentation and report so the class can archive, reference, and celebrate their work.
 
 ## Explore the Journal
 

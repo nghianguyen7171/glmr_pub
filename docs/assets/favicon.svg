@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="glmr-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f15a24" />
+      <stop offset="100%" stop-color="#ff872e" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="#171c26" />
+  <path d="M18 44V20h12c8 0 14 5.5 14 12s-6 12-14 12H18zm12-6c4.2 0 7-2.8 7-6s-2.8-6-7-6h-5v12h5zm18 6V20h6v24h-6z" fill="url(#glmr-accent)" />
+</svg>

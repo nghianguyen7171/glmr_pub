@@ -1,4 +1,9 @@
-# Issue 1 · Searching Strategy and Its Application
+---
+layout: journal
+title: Issue 1 · Searching Strategy and Its Application
+hero_title: Searching Strategy and Its Application
+hero_lead: "Peer-reviewed style coverage of GLMR’s midterm research reports and presentations on classical AI search techniques."
+---
 
 The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm submission from the Introduction to AI course under the lecture-note series *Lecture Note in Fundametal AI*. Each PDF opens directly in the browser so you can read without downloading. A fallback download link is included beneath each entry if you need an offline copy.
 
