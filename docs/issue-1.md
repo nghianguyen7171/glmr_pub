@@ -17,8 +17,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Safe-routing pipeline blending Greedy and A* search with blocked-edge simulations for Hanoi commuters. Weighted total 8.66.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%201%20Topic%204/INTRO_AI%20(1).pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%201%20Topic%204/INTRO_AI%20(1).pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-1-safe-routing.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%201%20Topic%204/INTRO_AI%20(1).pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%201%20Topic%204/INTRO_AI%20(1).pdf">Download PDF</a>
     </div>
   </article>
 
@@ -29,8 +30,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Waste-collection routing framed as TSP with MST heuristics and algorithm comparisons. Weighted total 8.20.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%202/Thu_Gom_Rac_Toi_Uu-1.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%202/Thu_Gom_Rac_Toi_Uu-1.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-2-waste-routing.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%202/Thu_Gom_Rac_Toi_Uu-1.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%202/Thu_Gom_Rac_Toi_Uu-1.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -41,8 +43,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Comparative study of DFS, Hill-Climbing, and Beam Search for N-Queens with emphasis on algorithm behavior. Weighted total 7.58.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%203%20Topic%208/AI-report.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%203%20Topic%208/AI-report.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-3-nqueens.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%203%20Topic%208/AI-report.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%203%20Topic%208/AI-report.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -53,8 +56,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Joint A* coordination for warehouse robots with makespan analysis and conflict resolution. Weighted total 8.38.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%204%20topic%2016/Group4_report.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%204%20topic%2016/Group4_report.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-4-mapf.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%204%20topic%2016/Group4_report.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%204%20topic%2016/Group4_report.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -65,8 +69,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Logistics routing case study highlighting BFS, GBFS, and A* heuristics for delivery scenarios. Weighted total 6.88.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%205%20topic%201/Introduction_to_AI.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%205%20topic%201/Introduction_to_AI.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-5-delivery.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%205%20topic%201/Introduction_to_AI.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%205%20topic%201/Introduction_to_AI.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -77,8 +82,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Maze pathfinding benchmarks across 100 randomized grids, emphasising evacuation analytics. Weighted total 9.12.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%206%20Topic%206/Group%206%20report.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%206%20Topic%206/Group%206%20report.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-6-maze-pathfinding.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%206%20Topic%206/Group%206%20report.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%206%20Topic%206/Group%206%20report.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -89,8 +95,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Greedy vs A* itinerary planning with interactive dashboards for one-day Hanoi tours. Weighted total 8.02.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%207%20Topic%202/NATIONAL%20ECONOMICS%20UNIVERSITY_FIXING_FINAL.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%207%20Topic%202/NATIONAL%20ECONOMICS%20UNIVERSITY_FIXING_FINAL.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-7-tourism.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%207%20Topic%202/NATIONAL%20ECONOMICS%20UNIVERSITY_FIXING_FINAL.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%207%20Topic%202/NATIONAL%20ECONOMICS%20UNIVERSITY_FIXING_FINAL.pdf">Download PDF</a>
     </div>
   </article>
 
@@ -101,8 +108,9 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
     </header>
     <p class="card-body"><strong>Focus:</strong> Pac-Man navigation using A* heuristics with BFS baselines and visual testing. Weighted total 8.00.</p>
     <div class="card-actions">
-      <a class="card-link" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%208%20topic%204/Group%208%20report.pdf" target="_blank" rel="noopener">Read Online</a>
-      <a class="card-link secondary" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%208%20topic%204/Group%208%20report.pdf">Download PDF</a>
+      <a class="card-link" href="/articles/group-8-pacman.html">View Article</a>
+      <a class="card-link secondary" href="https://rawcdn.githack.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%208%20topic%204/Group%208%20report.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a class="card-link secondary subtle" href="https://raw.githubusercontent.com/nghianguyen7171/glmr_pub/main/Midterm_AI_Project/Group%208%20topic%204/Group%208%20report.pdf">Download PDF</a>
     </div>
   </article>
 </section>
