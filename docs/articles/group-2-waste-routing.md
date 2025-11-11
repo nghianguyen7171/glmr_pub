@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-2-waste-routing.html
 title: Optimal Waste Collection Routing
 hero_title: Optimal Waste Collection Routing
 hero_lead: "Group 2 elevates municipal waste logistics by benchmarking UCS, Greedy, and A* search with realistic street data."

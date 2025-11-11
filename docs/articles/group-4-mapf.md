@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-4-mapf.html
 title: Optimizing Multi-Agent Path Finding in Warehouses
 hero_title: Optimizing Multi-Agent Path Finding in Warehouses
 hero_lead: "Group 4 dissects BFS, independent A*, and Joint A* to orchestrate collision-free robot navigation."

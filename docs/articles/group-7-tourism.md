@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-7-tourism.html
 title: One-Day Hanoi Tourism Route Planning
 hero_title: One-Day Hanoi Tourism Route Planning
 hero_lead: "Group 7 blends Greedy and A* search to curate visitor itineraries that respect opening times and travel budgets."

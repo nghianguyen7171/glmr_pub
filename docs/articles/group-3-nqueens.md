@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-3-nqueens.html
 title: Applying AI Search Algorithms to Solve the N-Queens Problem
 hero_title: Applying AI Search Algorithms to Solve the N-Queens Problem
 hero_lead: "Group 3 benchmarks DFS, Hill-Climbing, and Beam Search to illuminate search trade-offs in the iconic N-Queens puzzle."

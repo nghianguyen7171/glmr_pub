@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-1-safe-routing.html
 title: Safe Routing Under Traffic Incidents
 hero_title: Safe Routing Under Traffic Incidents
 hero_lead: "Group 1 contrasts Greedy and A* search to preserve commuter safety across Hanoi when roads become disrupted."

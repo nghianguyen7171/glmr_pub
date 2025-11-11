@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-5-delivery.html
 title: Urban Delivery with Classical Search Heuristics
 hero_title: Urban Delivery with Classical Search Heuristics
 hero_lead: "Group 5 prototypes a Hanoi delivery planner by contrasting BFS, Greedy, and A* across real map segments."

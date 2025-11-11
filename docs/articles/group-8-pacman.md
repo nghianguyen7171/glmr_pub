@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-8-pacman.html
 title: Pac-Man Pathfinding with A*
 hero_title: Pac-Man Pathfinding with A*
 hero_lead: "Group 8 adapts A* and BFS to guide Pac-Man through maze environments while collecting food efficiently."

@@ -1,6 +1,5 @@
 ---
 layout: article
-permalink: /articles/group-6-maze-pathfinding.html
 title: Maze Pathfinding for Emergency Evacuation
 hero_title: Maze Pathfinding for Emergency Evacuation
 hero_lead: "Group 6 stress-tests BFS, DFS, and Greedy Best-First Search across 100 randomized mazes to inform evacuation design."
