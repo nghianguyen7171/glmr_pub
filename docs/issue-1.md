@@ -21,7 +21,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 1 · Presentation 8.0 · Report 9.1</p>
-      <h3>Tìm đường đi an toàn khi có sự cố giao thông</h3>
+      <h3>Finding Safe Routes in Traffic Incidents</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Safe-routing pipeline blending Greedy and A* search with blocked-edge simulations for Hanoi commuters. Weighted total 8.66.</p>
     <div class="card-actions">
@@ -34,7 +34,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 2 · Presentation 7.0 · Report 9.0</p>
-      <h3>Thu gom rác tối ưu</h3>
+      <h3>Optimizing Waste Collection</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Waste-collection routing framed as TSP with MST heuristics and algorithm comparisons. Weighted total 8.20.</p>
     <div class="card-actions">
@@ -47,7 +47,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 3 · Presentation 8.0 · Report 7.3</p>
-      <h3>Giải toán N-Queens</h3>
+      <h3>Solving N-Queens</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Comparative study of DFS, Hill-Climbing, and Beam Search for N-Queens with emphasis on algorithm behavior. Weighted total 7.58.</p>
     <div class="card-actions">
@@ -60,7 +60,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 4 · Presentation 7.0 · Report 9.3</p>
-      <h3>Tìm đường đi cho 2 robots không va chạm</h3>
+      <h3>Finding Routes for Two Robots</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Joint A* coordination for warehouse robots with makespan analysis and conflict resolution. Weighted total 8.38.</p>
     <div class="card-actions">
@@ -73,7 +73,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 5 · Presentation 7.0 · Report 6.8</p>
-      <h3>Giao hàng trong thành phố Hà Nội</h3>
+      <h3>City Delivery</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Logistics routing case study highlighting BFS, GBFS, and A* heuristics for delivery scenarios. Weighted total 6.88.</p>
     <div class="card-actions">
@@ -86,7 +86,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 6 · Presentation 9.0 · Report 9.2</p>
-      <h3>Thoát khỏi mê cung</h3>
+      <h3>Maze Pathfinding</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Maze pathfinding benchmarks across 100 randomized grids, emphasising evacuation analytics. Weighted total 9.12.</p>
     <div class="card-actions">
@@ -99,7 +99,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 7 · Presentation 7.0 · Report 8.7</p>
-      <h3>Kế hoạch tham quan Hà Nội trong 1 ngày</h3>
+      <h3>Hanoi City Tour</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Greedy vs A* itinerary planning with interactive dashboards for one-day Hanoi tours. Weighted total 8.02.</p>
     <div class="card-actions">
@@ -112,7 +112,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 8 · Presentation 8.0 · Report 8.0</p>
-      <h3>Game Pac-Man tìm thức ăn</h3>
+      <h3>Pac-Man Food Search</h3>
     </header>
     <p class="card-body"><strong>Focus:</strong> Pac-Man navigation using A* heuristics with BFS baselines and visual testing. Weighted total 8.00.</p>
     <div class="card-actions">
@@ -201,7 +201,7 @@ The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm s
   <article class="collection-card">
     <header>
       <p class="card-meta">Group 7</p>
-      <h3>Kế hoạch tham quan Hà Nội trong ngày</h3>
+      <h3>Hanoi City Tour</h3>
     </header>
     <p class="card-body">Interactive day-trip planning visuals; deck is provided in two parts for optimal loading.</p>
     <div class="card-actions">
