@@ -7,6 +7,14 @@ hero_lead: "Peer-reviewed style coverage of GLMR’s midterm research reports an
 
 The inaugural issue of **GlennMurray Published (GLMR)** collects every midterm submission from the Introduction to AI course under the lecture-note series *Lecture Note in Fundametal AI*. Each PDF opens directly in the browser so you can read without downloading. A fallback download link is included beneath each entry if you need an offline copy.
 
+### Editorial Highlights
+
+<ul class="callout-list">
+  <li><strong>Top Performers:</strong> Group 6’s maze pathfinding study (weighted 9.12) and Group 1’s safe-routing report (weighted 8.66) anchor this issue with rigorous experimentation and real-world impact.</li>
+  <li><strong>Diverse Applications:</strong> Articles span municipal services, logistics, multi-agent robotics, and entertainment AI, showcasing the breadth of classical search techniques.</li>
+  <li><strong>Presentation Spotlight:</strong> Interactive dashboards from Group 7 and Pac-Man heuristics from Group 8 demonstrate engaging visual storytelling.</li>
+</ul>
+
 ## Research Reports
 
 <section class="collection-grid">
