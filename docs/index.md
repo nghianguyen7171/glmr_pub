@@ -1,17 +1,17 @@
-# GLMR AI Midterm Journal
+# Lecture Note in Fundametal AI
 
-Welcome to the GLMR AI Midterm Journal, a curated publication featuring the Introduction to AI midterm presentations and reports from the 2025 cohort. Each PDF submission is catalogued as part of our inaugural issue so the class can archive, reference, and celebrate their work.
+Welcome to **GlennMurray Published (GLMR)**, a lecture-note style journal curated for the Introduction to AI course. Our current issue, **Searching Strategy and Its Application**, assembles every midterm presentation and report from the 2025 cohort so the class can archive, reference, and celebrate their work.
 
 ## Explore the Journal
 
-- [Issue 1: Fall 2025 Showcase](issue-1.md)
+- [Issue 1: Searching Strategy and Its Application](issue-1.md)
 - [Scoring Summary](scoring-summary.md)
 
 ## About This Publication
 
-This journal is generated directly from our course repository and is intended to be hosted via GitHub Pages. Use it to:
+This site is generated directly from our course repository and is hosted via GitHub Pages. Use it to:
 
-- Browse every group’s midterm submission with convenient download links.
+- Browse every group’s midterm submission with convenient read-online and download links.
 - Compare presentation and report performance at a glance.
 - Share the cohort’s work with peers, advisors, and future students.
 
